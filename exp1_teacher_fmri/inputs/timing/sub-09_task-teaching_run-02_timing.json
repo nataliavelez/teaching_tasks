@@ -1,0 +1,931 @@
+[
+    {
+        "type": "pause",
+        "ons": 0,
+        "dur": 5
+    },
+    {
+        "type": "study",
+        "dur": 25,
+        "ons": 5,
+        "problem": 17,
+        "problem_idx": 0,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 30,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 0,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 0.85,
+        "ons": 35
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 35.85,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 0,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 36.85,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 0,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.15,
+        "ons": 38.85
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 40.0,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 0,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 42.0,
+        "dur": 2.0
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 44.0,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 1,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.7000000000000002,
+        "ons": 49.0
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 50.7,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 1,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 51.7,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 1,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.4000000000000004,
+        "ons": 53.7
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 56.1,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 1,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 58.1,
+        "dur": 1.9500000000000002
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 60.050000000000004,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 2,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.05,
+        "ons": 65.05000000000001
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 66.10000000000001,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 2,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 67.10000000000001,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 2,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.35,
+        "ons": 69.10000000000001
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 70.45,
+        "problem": 17,
+        "problem_idx": 0,
+        "ex_idx": 2,
+        "order": [
+            "C",
+            "A",
+            "D",
+            "B"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 72.45,
+        "dur": 1.2
+    },
+    {
+        "type": "pause",
+        "ons": 73.65,
+        "dur": 5.0
+    },
+    {
+        "type": "study",
+        "dur": 25,
+        "ons": 78.65,
+        "problem": 7,
+        "problem_idx": 1,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 103.65,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 0,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 0.75,
+        "ons": 108.65
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 109.4,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 0,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 110.4,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 0,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 0.95,
+        "ons": 112.4
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 113.35000000000001,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 0,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 115.35000000000001,
+        "dur": 0.8
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 116.15,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 1,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.05,
+        "ons": 121.15
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 123.2,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 1,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 124.2,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 1,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.3,
+        "ons": 126.2
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 127.5,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 1,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 129.5,
+        "dur": 0.9
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 130.4,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 2,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.65,
+        "ons": 135.4
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 137.05,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 2,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 138.05,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 2,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.55,
+        "ons": 140.05
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 141.60000000000002,
+        "problem": 7,
+        "problem_idx": 1,
+        "ex_idx": 2,
+        "order": [
+            "B",
+            "D",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 143.60000000000002,
+        "dur": 1.6
+    },
+    {
+        "type": "pause",
+        "ons": 145.20000000000002,
+        "dur": 3.0
+    },
+    {
+        "type": "study",
+        "dur": 25,
+        "ons": 148.20000000000002,
+        "problem": 8,
+        "problem_idx": 2,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 173.20000000000002,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 0,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.8,
+        "ons": 178.20000000000002
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 180.00000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 0,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 181.00000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 0,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.4,
+        "ons": 183.00000000000003
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 184.40000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 0,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 186.40000000000003,
+        "dur": 2.1500000000000004
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 188.55000000000004,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 1,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.2,
+        "ons": 193.55000000000004
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 195.75000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 1,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 196.75000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 1,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.9000000000000001,
+        "ons": 198.75000000000003
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 200.65000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 1,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 202.65000000000003,
+        "dur": 1.1
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 203.75000000000003,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 2,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.45,
+        "ons": 208.75000000000003
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 211.20000000000002,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 2,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 212.20000000000002,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 2,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.85,
+        "ons": 214.20000000000002
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 216.05,
+        "problem": 8,
+        "problem_idx": 2,
+        "ex_idx": 2,
+        "order": [
+            "D",
+            "B",
+            "A",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 218.05,
+        "dur": 1.25
+    },
+    {
+        "type": "pause",
+        "ons": 219.3,
+        "dur": 7.0
+    },
+    {
+        "type": "study",
+        "dur": 25,
+        "ons": 226.3,
+        "problem": 11,
+        "problem_idx": 3,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 251.3,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 0,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.35,
+        "ons": 256.3
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 258.65000000000003,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 0,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 259.65000000000003,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 0,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.75,
+        "ons": 261.65000000000003
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 263.40000000000003,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 0,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 265.40000000000003,
+        "dur": 2.3
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 267.70000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 1,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.0,
+        "ons": 272.70000000000005
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 273.70000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 1,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 274.70000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 1,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.5,
+        "ons": 276.70000000000005
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 278.20000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 1,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 280.20000000000005,
+        "dur": 2.25
+    },
+    {
+        "type": "choose",
+        "dur": 5,
+        "ons": 282.45000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 2,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 2.5,
+        "ons": 287.45000000000005
+    },
+    {
+        "type": "pre",
+        "dur": 1,
+        "ons": 289.95000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 2,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "show",
+        "dur": 2,
+        "ons": 290.95000000000005,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 2,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "dur": 1.4500000000000002,
+        "ons": 292.95000000000005
+    },
+    {
+        "type": "rate",
+        "dur": 2,
+        "ons": 294.40000000000003,
+        "problem": 11,
+        "problem_idx": 3,
+        "ex_idx": 2,
+        "order": [
+            "A",
+            "B",
+            "D",
+            "C"
+        ]
+    },
+    {
+        "type": "pause",
+        "ons": 296.40000000000003,
+        "dur": 2.1
+    },
+    {
+        "type": "pause",
+        "dur": 5,
+        "ons": 298.50000000000006
+    }
+]

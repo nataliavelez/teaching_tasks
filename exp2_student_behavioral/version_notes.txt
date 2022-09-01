@@ -1,0 +1,7 @@
+Student task
+February 2022
+Natalia Vélez, Taylor Burke
+
+In this experiment, an independent sample of "students" will be shown the hints selected by "teachers" during the fMRI experiment, and will place bets on how likely each hypothesis is to be the correct answer. The goal of this experiment is to (1) acquire a model-independent measure of teacher quality and to (2) validate the model by comparing the model-predicted posterior belief over hypotheses with human students' bets.
+
+v1 was launched as a small pilot in early February 2022; the current version includes (1) changes to the assignment script (to display an error message when no HITs are available) and (2) additional data check questions to ensure data quality.

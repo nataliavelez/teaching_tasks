@@ -1,0 +1,3221 @@
+<!doctype html>
+<meta charset='UTF-8' />
+<html>
+	<head>
+        <title>Student Game</title>
+
+        <!-- General utilities -->
+        <script src = "shared/jquery-3.6.0.min.js"></script>
+        <script src = "shared/jquery-ui.min.js"></script>
+        <link rel = "stylesheet" href="shared/jquery-ui.min.css">
+        <script src = "shared/underscore-min.js"></script>
+		<script src ="shared/bootstrap.bundle.min.js"></script>
+        <link href="shared/bootstrap.min.css" rel="stylesheet"    type="text/css"></link>
+        <script src = "shared/sprintf.min.js"></script>
+        <script src = "shared/bootstrap-slider.js"></script>
+        <link href="shared/bootstrap-slider.css" rel="stylesheet" type="text/css"></link>
+        
+        <!-- JSPsych -->
+		<script src="shared/jspsych-6.3.1/jspsych.js"></script>
+        <link rel="stylesheet" href="shared/jspsych-6.3.1/css/jspsych.css">
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-fullscreen.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-instructions.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-call-function.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-html-slider-response.js"></script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-survey-multi-choice.js"> </script>
+        <script src="shared/jspsych-6.3.1/plugins/jspsych-survey-text.js"></script>
+
+        <!-- Experiment-specific scripts & styles -->
+        <script src="scripts/loading-promise.js"></script>
+        <script src="scripts/utils.js"></script>
+        <script src="scripts/plugins/consent.js"></script>
+        <script src="scripts/plugins/quiz-multi-choice.js"></script>
+        <script src="scripts/plugins/student-bet.js"></script> 
+        <script src="scripts/plugins/student-feedback.js"></script> 
+        <script src="scripts/plugins/post-survey.js"></script>
+        <script src="scripts/plugins/practice-bet.js"></script>
+        <!-- <script src="scripts/exp-timeline.js"></script> -->
+        <link href="styles/exp-style.css" rel="stylesheet" type="text/css"></link>
+
+    </head>
+    <body>
+        <div id = "loading-prompt" style="height:100vh; width: 100vw;">
+
+            <div class="row d-flex text-center h-100">
+                <div class="col-md-12 justify-content-center align-self-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                      </div>
+                      <p>We're preparing your HIT. This should take a few seconds!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id = "jspsych-display"></div>
+
+        <div id = "templates">      
+            <div id = "failure-msg">
+                <div id = "failure" class="alert alert-danger" role="alert" style="width:50vw;display:block;margin:0 auto;text-align:center;margin: 5vh auto 5vh auto;padding:5vw;">
+                    <h1>Oops!</h1>
+                    <p>We're very sorry - this HIT is currently unavailable. Our server may be under heavy load right now. Please exit this page and return the HIT.</p>
+                  </div>          
+            </div>
+            
+            <div id = "consent" class = "slide">
+                <h1>Consent</h1>
+        
+                <p>Please read this consent agreement carefully before deciding whether to participate in this experiment.</p>
+        
+                <p><strong>Purpose of the research:</strong> To examine what people learn from information provided to them by teachers.</p>
+        
+                <p><strong>What you will do in this research:</strong> In this task you will answer a series of multiple choice
+                    questions. You will get hints on how to answer these questions from teachers who played an earlier version of
+                    this HIT. </p>
+
+                <p><strong>Time required:</strong> This experiment will take 30-40 minutes to complete.</p>
+        
+                <p><strong>Risks:</strong> There are no anticipated risks associated with participating in this study. 
+                    The effects of participating should be comparable to those you would experience from viewing a computer
+                    monitor and using a mouse for the duration of the experiment.</p>
+        
+                <p><strong>Benefits:</strong> The study provides important information about the nature of learning, 
+                    decision making, and action selection.</p>
+        
+                <p><strong>Compensation:</strong> You will receive $2 for completing the experiment and a performance
+                    bonus of up to $5.</p>
+        
+                <p><strong>Confidentiality:</strong>  Your participation in this study will remain confidential. 
+                    No personally identifiable information will be associated with your data. Your de-identified data may be
+                    shared with other researchers and used in future projects.</p>
+        
+                <p><strong>Participation and withdrawal:</strong> Your participation in this study is completely voluntary
+                    and you may refuse to participate or you may choose to withdraw at any time without penalty or loss of 
+                    benefits to which you are otherwise entitled.</p>
+        
+                <p><strong>How to contact the researcher:</strong> If you have questions or concerns about your participation 
+                    or payment, or want to request a summary of research findings, please contact Natalia Velez, nvelez@fas.harvard.edu.</p>
+        
+                <p><strong>Whom to contact about your rights in this research:</strong> For questions, concerns, suggestions, 
+                    or complaints that have not been or cannot be addressed by the researcher, or to report research-related harm,
+                    please contact the Committee on the Use of Human Subjects in Research at Harvard University, 1414 Massachusetts
+                    Avenue, Second Floor, Cambridge, MA 02138. Phone: 617-496-2847. Email: cuhs@fas.harvard.edu.</p> 
+        
+                <div class = "alert alert-primary" role = "alert">
+                        <h3>Agreement</h3>
+                        <p><strong>
+                            The nature and purpose of this research have been sufficiently explained and I agree to participate in this study. I understand that I am free to withdraw at any time without incurring any penalty.
+                        </strong></p>		
+                        <p>
+                            Please consent by clicking the button below to continue. Otherwise, please exit the study at this time.
+                        </p>
+                            <div align=center>
+                                <p>
+                                    <input type="checkbox" id="consent_checkbox" style="transform: scale(1.5);"/>
+                                    &nbsp;I agree to take part in this study.
+                                </p>
+                                
+                                <button type="button" id="start" class = "jspsych-btn" disabled>Continue</button>
+                            </div>
+                </div>
+            </div>
+
+            <div id = "instructions" class = "slide">
+                <h1>%s</h1>
+				<p>%s</p>
+				<img class = 'hero' src='%s' />
+            </div>
+
+            <div id = "instructions-example" class = "slide">
+                    <h1>%s</h1>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2>A</h2>
+                            <table class = "hypothesis true">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>D</h2>
+                            <table class ='hypothesis'>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td class = 'pos'>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+
+            <div id = "instructions-canvas" class = "slide">
+				<h1>%s</h1>
+                <p>%s</p>
+                <p>%s</p>
+                <div id = "canvas-wrapper">
+					<table class = "student-canvas">
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</div>
+				<div id = "hypothesis-space">
+					<div class = "hypothesis-wrapper">
+						<h2>A</h2>
+						<table class = "hypothesis true">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class = "hypothesis-wrapper">
+						<h2>B</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class = "hypothesis-wrapper">
+						<h2>C</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class = "hypothesis-wrapper">
+						<h2>D</h2>
+						<table class ='hypothesis'>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td class = 'pos'>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+            </div>
+            
+            <div id = "instructions-hint" class = "slide">
+                <h1>%s</h1>
+                <p>%s</p>
+                <p>%s</p>
+                <div id = "canvas-wrapper">
+					<table class = "student-canvas">
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td class = "selected">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td class = "selected">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</div>
+				<div id = "hypothesis-space">
+					<div class = "hypothesis-wrapper">
+                        <h2>A</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+					
+					<div class = "hypothesis-wrapper">
+                        <h2>B</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class = "hypothesis-wrapper">
+                        <h2>C</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class = "hypothesis-wrapper">
+                        <h2>D</h2>
+						<table class = "hypothesis">
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td class = "pos">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+
+				</div>
+				
+            </div>
+
+            <div id = "instructions-chips-1" class = "slide">
+                    <h1>%s</h1>
+                    <p>%s</p>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2>A</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="A-instructions-betting-slider-1"
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+                        
+                        <div class = "hypothesis-wrapper">
+                            <h2>B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="B-instructions-betting-slider-1" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="C-instructions-betting-slider-1" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>D</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="D-instructions-betting-slider-1" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                    </div>
+                    
+            </div>
+
+            <div id = "instructions-chips-2" class = "slide">
+                <h1>%s</h1>
+                <p>%s</p>
+                <div id = "canvas-wrapper">
+                    <table class = "student-canvas">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td class = "selected">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id = "hypothesis-space">
+                    <div class = "hypothesis-wrapper">
+                        <h2>A</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <input id="A-instructions-betting-slider-2" 
+                          data-slider-id='betting-slider' 
+                          type="text"  data-slider-min="0"
+                          data-slider-max="100" 
+                          data-slider-step="1" 
+                          data-slider-value="50" 
+                          data-slider-enabled="false"
+                        />
+                    </div>
+                    
+                    <div class = "hypothesis-wrapper">
+                        <h2>B</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <input id="B-instructions-betting-slider-2" 
+                          data-slider-id='betting-slider' 
+                          type="text"  
+                          data-slider-min="0" 
+                          data-slider-max="100" 
+                          data-slider-step="1" 
+                          data-slider-value="0" 
+                          data-slider-enabled="false"
+                        />
+                    </div>
+
+                    <div class = "hypothesis-wrapper">
+                        <h2>C</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <input id="C-instructions-betting-slider-2" 
+                          data-slider-id='betting-slider' 
+                          type="text"  
+                          data-slider-min="0" 
+                          data-slider-max="100" 
+                          data-slider-step="1" 
+                          data-slider-value="50" 
+                          data-slider-enabled="false"
+                        />
+                    </div>
+
+                    <div class = "hypothesis-wrapper">
+                        <h2>D</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td class = "pos">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <input id="D-instructions-betting-slider-2" 
+                          data-slider-id='betting-slider' 
+                          type="text"  
+                          data-slider-min="0" 
+                          data-slider-max="100" 
+                          data-slider-step="1" 
+                          data-slider-value="0" 
+                          data-slider-enabled="false"
+                        />
+                    </div>
+
+                </div>
+                
+            </div>
+
+            <div id = "instructions-chips-3" class = "slide">
+                    <h1>%s</h1>
+                    <p>%s</p>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "selected">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "selected">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2>A</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="A-instructions-betting-slider-3" 
+                              data-slider-id='betting-slider' 
+                              type="text" 
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+                        
+                        <div class = "hypothesis-wrapper">
+                            <h2>B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="B-instructions-betting-slider-3" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="C-instructions-betting-slider-3" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="100" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>D</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="D-instructions-betting-slider-3" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="0" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                    </div>
+                    
+            </div>
+
+            <div id = "instructions-chips-4" class = "slide">
+                    <h1>%s</h1>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2>A</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="A-instructions-betting-slider-4" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="25"
+                              data-slider-enabled="false"
+                            />
+                        </div>
+                        
+                        <div class = "hypothesis-wrapper">
+                            <h2>B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="B-instructions-betting-slider-4" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="25" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="C-instructions-betting-slider-4" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="25" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>D</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="D-instructions-betting-slider-4" 
+                              data-slider-id='betting-slider' 
+                              type="text"  
+                              data-slider-min="0" 
+                              data-slider-max="100" 
+                              data-slider-step="1" 
+                              data-slider-value="25" 
+                              data-slider-enabled="false"
+                            />
+                        </div>
+                    </div>
+                    
+            </div>
+            
+            <div id = "practice-problem" class = "slide">
+                    <h1>%s</h1>
+                    <p>%s</p>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "selected">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td class = "selected">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2>A</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="A-practice-betting-slider" data-slider-id='betting-slider' type="text"  data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="25"/>
+                        </div>
+                        
+                        <div class = "hypothesis-wrapper">
+                            <h2>B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="B-practice-betting-slider" data-slider-id='betting-slider' type="text"  data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="25"/>
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="C-practice-betting-slider" data-slider-id='betting-slider' type="text"  data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="25"/>
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2>D</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td class = "pos">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="D-practice-betting-slider" data-slider-id='betting-slider' type="text"  data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="25"/>
+                        </div>
+                    </div>
+
+                    <button id="button" class="jspsych-btn" disabled>Place Bets</button>      
+            </div>
+
+            <div id = "student-betting" class = "slide">
+                    <h1>Problem %i/%i</h1>
+                    <p>%s</p>
+                    <div id = "canvas-wrapper">
+                        <table class = "student-canvas">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>%s</p>
+                    <div id = "hypothesis-space">
+                        <div class = "hypothesis-wrapper">
+                            <h2> A</h2>
+                            <table class='hypothesis'>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            
+                            <input id="A-betting-slider" data-slider-id='betting-slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"/>
+                            <!-- <div class="slidecontainer">
+                                <div id="A-slider" class="slider"></div>
+                            </div> -->
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2> B</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="B-betting-slider" data-slider-id='betting-slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"/>
+                            <!-- <div class="slidecontainer">
+                                <div id="B-slider" class="slider"></div>
+                            </div> -->
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2> C</h2>
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="C-betting-slider" data-slider-id='betting-slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"/>
+                            <!-- <div class="slidecontainer">
+                                <div id="C-slider" class="slider"></div>
+                            </div> -->
+                        </div>
+    
+                        <div class = "hypothesis-wrapper">
+                            <h2> D</h2> 
+                            <table class = "hypothesis">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <input id="D-betting-slider" data-slider-id='betting-slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"/>
+                            <!-- <div class="slidecontainer">
+                                <div id="D-slider" class="slider"></div>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <button id="button" class="jspsych-btn" disabled>Place Bets</button>
+            </div>
+
+            <div id = "survey" class = "slide">
+                    <h1>Almost done!</h1>
+                    <p>Answering these questions is optional but will help us understand your answers.</p>
+    
+                    <form>
+                        <div class="form-group">
+                            <label for="survey-instructions">Did you read the instructions, and do you think you did the task correctly?</label>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-instructions" id="instructions-y" value="y">
+                                <label class="form-check-label" for="instructions-y">
+                                  Yes
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-instructions" id="instructions-n" value="n">
+                                <label class="form-check-label" for="instructions-n">
+                                  No
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-instructions" id="instructions-c" value="confused">
+                                <label class="form-check-label" for="instructions-c">
+                                  I was confused
+                                </label>						  
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-gender">Gender</label>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-gender" id="gender-f" value="f">
+                                <label class="form-check-label" for="gender-f">
+                                  Female
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-gender" id="gender-m" value="m">
+                                <label class="form-check-label" for="gender-m">
+                                  Male
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-gender" id="gender-nb" value="nb">
+                                <label class="form-check-label" for="gender-nb">
+                                  Non-binary
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-gender" id="gender-o" value="o">
+                                <label class="form-check-label" for="gender-o">
+                                  Prefer to self-identify <input type="text" class="form-control" id="gender-other">
+                                </label>						  
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-age">Age</label>
+                            <input type="number" class="form-control" id="survey-age">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-education">What is the highest degree or level of education you have completed?</label>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-education" id="education-1" value="some-high">
+                                <label class="form-check-label" for="education-1">
+                                  Some high school
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-education" id="education-2" value="high">
+                                <label class="form-check-label" for="education-2">
+                                    Graduated high school or equivalent (e.g., GED)
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-education" id="education-3" value="some-college">
+                                <label class="form-check-label" for="education-3">
+                                    Some college
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-education" id="education-4" value="college">
+                                <label class="form-check-label" for="education-4">
+                                    Graduated college
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-education" id="education-5" value="grad">
+                                <label class="form-check-label" for="education-5">
+                                    Hold a higher degree
+                                </label>						  
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-language">Native language:*</label>
+                            <input type="text" class="form-control" id="survey-language">
+                            <small class="form-text text-muted">*the language(s) spoken at home when you were a child</small>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-enjoy">How much did you enjoy the HIT?</label>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-enjoy" id="enjoy-1" value="worse">
+                                <label class="form-check-label" for="enjoy-1">
+                                  Worse than the average HIT
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-enjoy" id="enjoy-2" value="average">
+                                <label class="form-check-label" for="enjoy-2">
+                                  An average HIT
+                                </label>						  
+                            </div>
+                            <div class = "form-check">
+                                <input class="form-check-input" type="radio" name="survey-enjoy" id="enjoy-3" value="better">
+                                <label class="form-check-label" for="enjoy-3">
+                                  Better than the average HIT
+                                </label>						  
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="survey-comments">We would be interested in any comments you have about this study. Please type them here:</label>
+                            <textarea class="form-control" id="survey-comments" rows="3"></textarea>
+                        </div>
+    
+                        <button class="jspsych-btn submit">
+                            Submit
+                        </button>
+                    </form>
+            </div>
+
+            <div id = "student-feedback" class = "slide">
+                <h1>Problem %i/%i</h1>
+                <p>All done! The correct answer is highlighted below.</p>
+                <p>You earned <strong>$%0.2f</strong> on this problem. Your total bonus so far is <strong>$%0.2f</strong>.</p>
+                <div id = "canvas-wrapper">
+                    <table class = "student-canvas">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id = "hypothesis-space">
+                    <div class = "hypothesis-wrapper">
+                        <h2> A</h2>
+                        <table class='hypothesis'>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        
+                        <!-- <div class="slidecontainer">
+                            <div id="A-slider" class="slider"></div>
+                        </div> -->
+                    </div>
+
+                    <div class = "hypothesis-wrapper">
+                        <h2> B</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <!-- <div class="slidecontainer">
+                            <div id="B-slider" class="slider"></div>
+                        </div> -->
+                    </div>
+
+                    <div class = "hypothesis-wrapper">
+                        <h2> C</h2>
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <!-- <div class="slidecontainer">
+                            <div id="C-slider" class="slider"></div>
+                        </div> -->
+                    </div>
+
+                    <div class = "hypothesis-wrapper">
+                        <h2> D</h2> 
+                        <table class = "hypothesis">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <!-- <div class="slidecontainer">
+                            <div id="D-slider" class="slider"></div>
+                        </div> -->
+                    </div>
+                </div>
+        </div>
+
+            <div id = "debrief" class = "slide">
+                <div class = "standalone debrief-slide">
+                    <h1>Thank you for completing our HIT!</h1>
+                    <p><strong>What was this HIT for?</strong> We are interested in how humans learn from other people. 
+                        In an earlier version of this task, we asked people to pick out hints to teach students (that's you!)
+                        how to answer these questions. We also asked teachers to predict how likely students would be to get these questions right. The goal of the HIT 
+                        you just played is to test whether teachers can accurately predict students' performance. 
+                    </p>
+                    <p><strong>Do these hints really come from other humans?</strong> Yes!</p>
+                <div class="alert alert-primary" role="alert">
+                    Your completion code is: <strong>f78MnQrZ8lFy</strong><br />
+                    It is now safe to close the tab.
+                </div>
+                </div>   
+            </div>   
+        </div>
+
+        
+
+    </body>
+</html>
