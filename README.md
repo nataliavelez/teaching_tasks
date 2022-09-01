@@ -1,5 +1,5 @@
 # Mentalizing regions and anterior cingulate cortex represent learners’ beliefs during teaching
-## Task materials
+Task materials
 Natalia Vélez, Alicia Chen, Fiery Cushman, Samuel J. Gershman
 Last updated September 2022
 

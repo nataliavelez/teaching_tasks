@@ -3,6 +3,7 @@ Natalia Vélez & Alicia Chen
 August 2022
 
 In order to run this task, you only need four files:
+
 (1) `briefing_video.mp4` was played to explain the task to participants before they practiced the controls. If you want to explain the task face-to-face, you can also use the slides in `task_explanation.key`.
 
 (2) `laptop_practice.sh` plays a practice, maze-solving task that participants can play to get used to operating the cursor. After participants solve the mazes, they then complete a brief run of the teaching task using practice problems that do not appear in the scanner task.
